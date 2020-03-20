@@ -4,19 +4,20 @@
  
 	if($_SERVER['REQUEST_METHOD']=='GET'){
 
-		$id = $_GET['id'];
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 25;
 		
-		$query = $conn->prepare("SELECT * FROM m_customer WHERE id=?");
-		$query->bind_param("i", $id);
+        $query = $conn->prepare("SELECT * FROM m_customer LIMIT ?");
+        $query->bind_param("i", $limit);
 		
-		//Eksekusi Query database
+		// Eksekusi Query database
 		if($query->execute()){
-            $result = $query->get_result()->fetch_assoc();
+            $result = $query->get_result()->fetch_all(MYSQLI_ASSOC);
+
 			$res = array([
 				'data' => $result,
 				'code' => 201,
             ]);
-
+            
             header('Content-Type: application/json');
 			echo json_encode($res);
 

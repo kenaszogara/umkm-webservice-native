@@ -6,7 +6,7 @@
 
 		$id = $_GET['id'];
 		
-		$query = $conn->prepare("SELECT * FROM m_customer WHERE id=?");
+		$query = $conn->prepare("SELECT * FROM m_products WHERE product_id=?");
 		$query->bind_param("i", $id);
 		
 		//Eksekusi Query database
@@ -16,7 +16,7 @@
 				'data' => $result,
 				'code' => 201,
             ]);
-
+            
             header('Content-Type: application/json');
 			echo json_encode($res);
 
