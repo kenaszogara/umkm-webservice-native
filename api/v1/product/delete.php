@@ -6,13 +6,13 @@
 
 		$id = $_GET['id'];
 		
-		$query = $conn->prepare("DELETE FROM m_customer WHERE id=?");
+		$query = $conn->prepare("DELETE FROM m_products WHERE product_id=?");
 		$query->bind_param("i", $id);
 		
 		//Eksekusi Query database
 		if($query->execute()){
 			$res = array([
-				'message' => 'Berhasil menghapus customer dengant id: ' . $id,
+				'message' => 'Berhasil menghapus product dengant id: ' . $id,
 				'code' => 201,
             ]);
 
